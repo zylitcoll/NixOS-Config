@@ -5,7 +5,7 @@
   python-packages = pkgs.python3.withPackages (
     ps:
       with ps; [
-	pip
+	      pip
         requests
         pyquery # needed for hyprland-dots Weather script
         ]
@@ -153,15 +153,14 @@
    
     obs-studio = {
       enable = true;
-
       plugins = with pkgs.obs-studio-plugins; [
         # Plugin untuk Wayland (jika digunakan)
-        #wlrobs
+        wlrobs
         obs-backgroundremoval
       
         # Plugin capture untuk Intel
-        obs-vaapi              # VAAPI encoder/decoder untuk Intel iGPU
-        obs-vkcapture          # Vulkan capture (bisa bekerja dengan Intel)
+        # obs-vaapi              # VAAPI encoder/decoder untuk Intel iGPU
+        # obs-vkcapture          # Vulkan capture (bisa bekerja dengan Intel)
       
         # Plugin umum yang berguna
         obs-pipewire-audio-capture  # Audio capture via PipeWire
@@ -169,8 +168,8 @@
         obs-nvfbc                  # Frame Buffer Capture (alternatif)
       
         # Plugin output/encoding
-        obs-ndi                   # NDI support
-        obs-websocket             # Remote control via WebSocket
+        # obs-ndi                   # NDI support
+        # obs-websocket             # Remote control via WebSocket
       ];
     };
 
