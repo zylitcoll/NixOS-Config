@@ -18,7 +18,6 @@ in
         "libvirtd"
         "scanner"
         "lp"
-        "render"
         "video" 
         "input" 
         "audio"

@@ -22,12 +22,12 @@ in
         libvdpau-va-gl
         libva
 			  libva-utils
-        #intel-media-sdk       #  SDK untuk Intel Quick Sync (diperlukan OBS Studio/QSV encoder)
+        intel-media-sdk       #  SDK untuk Intel Quick Sync (diperlukan OBS Studio/QSV encoder)
         intel-compute-runtime #  OpenCL support (untuk komputasi GPU/machine learning)
         # Vulkan Support
         vulkan-loader        # Loader Vulkan dasar
         vulkan-validation-layers  # Tools debugging (opsional)
-
+        vulkan-tools
       ];
 
       # Dukungan 32-bit (untuk aplikasi seperti Wine/Steam)
@@ -36,10 +36,10 @@ in
       ];
     };
 
-    # 🔧 Variabel environment kritis
+    # Variabel environment kritis
     # environment.variables = {
-    #   LIBVA_DRIVER_NAME = "iHD";  # 🖥️ Paksa pakai driver Intel modern ("iHD" untuk Gen 8+, "i965" untuk Gen 4-7)
-    #   VDPAU_DRIVER = "va_gl";     # 🎮 Gunakan VA-API sebagai backend VDPAU (untuk game/aplikasi berbasis VDPAU)
+    #   LIBVA_DRIVER_NAME = "i965";  #  Paksa pakai driver Intel modern ("iHD" untuk Gen 8+, "i965" untuk Gen 4-7)
+    #   VDPAU_DRIVER = "va_gl";     #  Gunakan VA-API sebagai backend VDPAU (untuk game/aplikasi berbasis VDPAU)
     # };
 
   };

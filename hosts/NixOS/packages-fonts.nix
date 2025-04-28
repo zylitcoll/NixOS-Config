@@ -48,10 +48,6 @@
     inkscape-with-extensions
     libsForQt5.kdenlive
 
-    #grafix tool
-    vulkan-tools
-    libva-utils
-
     #data manager 
     keepassxc
 
@@ -153,24 +149,24 @@
    
     obs-studio = {
       enable = true;
-      plugins = with pkgs.obs-studio-plugins; [
-        # Plugin untuk Wayland (jika digunakan)
-        wlrobs
-        obs-backgroundremoval
-      
-        # Plugin capture untuk Intel
+      # plugins = with pkgs.obs-studio-plugins; [
+      #   # Plugin untuk Wayland (jika digunakan)
+        # wlrobs
+      #   obs-backgroundremoval
+      # 
+      #   # Plugin capture untuk Intel
         # obs-vaapi              # VAAPI encoder/decoder untuk Intel iGPU
-        # obs-vkcapture          # Vulkan capture (bisa bekerja dengan Intel)
-      
-        # Plugin umum yang berguna
-        obs-pipewire-audio-capture  # Audio capture via PipeWire
-        obs-gstreamer              # Dukungan GStreamer
-        obs-nvfbc                  # Frame Buffer Capture (alternatif)
-      
-        # Plugin output/encoding
-        # obs-ndi                   # NDI support
-        # obs-websocket             # Remote control via WebSocket
-      ];
+      #   obs-vkcapture          # Vulkan capture (bisa bekerja dengan Intel)
+      # 
+      #   # Plugin umum yang berguna
+      #   obs-pipewire-audio-capture  # Audio capture via PipeWire
+      #   obs-gstreamer              # Dukungan GStreamer
+      #   obs-nvfbc                  # Frame Buffer Capture (alternatif)
+      # 
+      #   # Plugin output/encoding
+      #   obs-ndi                   # NDI support
+      #   obs-websocket             # Remote control via WebSocket
+      # ];
     };
 
 

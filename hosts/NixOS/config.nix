@@ -72,8 +72,7 @@
     ## -end of BOOTLOADERS----- ##
 
 
-    # Extra Module Options
-    drivers.intel.enable = true;
+    
   
     # Make /tmp a tmpfs
     tmp = {
@@ -100,6 +99,9 @@
   #  theme = "nixos";
   #};
 
+
+  # Extra Module Options
+  drivers.intel.enable = true;
   vm.guest-services.enable = false;
   local.hardware-clock.enable = false;
 
