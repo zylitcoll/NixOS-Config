@@ -47,6 +47,7 @@
     gimp-with-plugins
     inkscape-with-extensions
     libsForQt5.kdenlive
+    obs-studio
 
     #data manager 
     keepassxc
