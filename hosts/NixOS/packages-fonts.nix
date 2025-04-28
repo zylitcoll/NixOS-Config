@@ -47,7 +47,10 @@
     gimp-with-plugins
     inkscape-with-extensions
     libsForQt5.kdenlive
-    obs-studio
+
+    #grafix tool
+    vulkan-tools
+    libva-utils
 
     #data manager 
     keepassxc
@@ -59,6 +62,9 @@
 
     #sosial media 
     telegram-desktop
+
+    #editor
+    vscode
 
 
     #tool bahasa programs
@@ -139,12 +145,35 @@
   programs = {
 	  hyprland = {
       enable = true;
-     	  #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland; #hyprland-git
-		    #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland; #xdph-git
-     	  
-        portalPackage = pkgs.xdg-desktop-portal-hyprland; # xdph none git
+     	#package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland; #hyprland-git
+		  #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland; #xdph-git
+     	portalPackage = pkgs.xdg-desktop-portal-hyprland; # xdph none git
   	  xwayland.enable = true;
     };
+   
+    obs-studio = {
+      enable = true;
+
+      plugins = with pkgs.obs-studio-plugins; [
+        # Plugin untuk Wayland (jika digunakan)
+        #wlrobs
+        obs-backgroundremoval
+      
+        # Plugin capture untuk Intel
+        obs-vaapi              # VAAPI encoder/decoder untuk Intel iGPU
+        obs-vkcapture          # Vulkan capture (bisa bekerja dengan Intel)
+      
+        # Plugin umum yang berguna
+        obs-pipewire-audio-capture  # Audio capture via PipeWire
+        obs-gstreamer              # Dukungan GStreamer
+        obs-nvfbc                  # Frame Buffer Capture (alternatif)
+      
+        # Plugin output/encoding
+        obs-ndi                   # NDI support
+        obs-websocket             # Remote control via WebSocket
+      ];
+    };
+
 
 	
 	  waybar.enable = true;
@@ -184,6 +213,7 @@
     };
 	
   };
+
 
   #Docker
   virtualisation.docker = {

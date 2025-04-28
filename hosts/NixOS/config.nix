@@ -99,15 +99,6 @@
   #  theme = "nixos";
   #};
 
-  # Extra Module Options
-  drivers.amdgpu.enable = true;
-  drivers.intel.enable = true;
-  drivers.nvidia.enable = false;
-  drivers.nvidia-prime = {
-    enable = false;
-    intelBusID = "";
-    nvidiaBusID = "";
-  };
   vm.guest-services.enable = false;
   local.hardware-clock.enable = false;
 
@@ -326,10 +317,35 @@
     defaultNetwork.settings.dns_enabled = false;
   };
 
-  # OpenGL
-  hardware.graphics = {
-    enable = true;
+  hardware.opengl = {
+  enable = true;  #  Mengaktifkan dukungan OpenGL dasar (wajib diisi)
+  
+  #  Paket tambahan untuk akselerasi hardware Intel
+  extraPackages = with pkgs; [
+    intel-media-driver    #  Driver modern Intel (Gen 8+) untuk Quick Sync Video (H.264/HEVC encoding)
+    intel-vaapi-driver
+    libva                 #  VA-API (Video Acceleration API - inti untuk hardware encoding/decoding)
+    libvdpau-va-gl        #  Jembatan VA-API ke VDPAU (untuk aplikasi lawas seperti MPlayer)
+    intel-media-sdk       #  SDK untuk Intel Quick Sync (diperlukan OBS Studio/QSV encoder)
+    intel-compute-runtime #  OpenCL support (untuk komputasi GPU/machine learning)
+    # Vulkan Support
+    vulkan-loader        # Loader Vulkan dasar
+    vulkan-validation-layers  # Tools debugging (opsional)
+  ];
+
+  # 🏛️ Dukungan 32-bit (untuk aplikasi seperti Wine/Steam)
+  extraPackages32 = with pkgs.pkgsi686Linux; [ 
+      libva  # VA-API versi 32-bit
+    ];
   };
+
+  # # 🔧 Variabel environment kritis
+  # environment.variables = {
+  #   LIBVA_DRIVER_NAME = "iHD";  # 🖥️ Paksa pakai driver Intel modern ("iHD" untuk Gen 8+, "i965" untuk Gen 4-7)
+  #   VDPAU_DRIVER = "va_gl";     # 🎮 Gunakan VA-API sebagai backend VDPAU (untuk game/aplikasi berbasis VDPAU)
+  # };
+
+
 
   console.keyMap = "${keyboardLayout}";
 
