@@ -124,6 +124,7 @@
   # FONTS
   fonts.packages = with pkgs; [
     noto-fonts
+    corefonts  #msfonts
     fira-code
     noto-fonts-cjk-sans
     jetbrains-mono
