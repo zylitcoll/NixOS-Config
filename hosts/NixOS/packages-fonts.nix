@@ -59,17 +59,18 @@
     #sosial media 
     telegram-desktop
 
-    #editor
-    vscode
-
 
     #tool bahasa programs
     gh 
     jdk21_headless
     nodejs_23
+    nodePackages_latest.prettier
     pnpm_10
     php 
     php82Packages.composer
+    lua
+    stylua
+
 
 
          
