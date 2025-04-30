@@ -22,5 +22,4 @@ then generate your hardware.nix with:
 Run this to enable flakes and install the flake replacing hostname with whatever you put as the hostname:
 
     NIX_CONFIG="experimental-features = nix-command flakes" 
-    
     sudo nixos-rebuild switch --flake .#hostname
