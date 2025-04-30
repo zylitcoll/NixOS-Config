@@ -6,6 +6,8 @@
     ps:
       with ps; [
 	      pip
+        black
+        isort
         requests
         pyquery # needed for hyprland-dots Weather script
         ]
