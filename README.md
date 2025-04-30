@@ -11,7 +11,7 @@ Clone this repo & CD into it:
 You should stay in this directory for the rest of the install
 Create the host directory for your machine(s)
 
-cp -r hosts/default hosts/<your-desired-hostname>
+    cp -r hosts/default hosts/<your-desired-hostname>
 
     
 Edit as required the config.nix , packages-fonts.nix and/or users.nix in hosts/<your-desired-hostname>/
