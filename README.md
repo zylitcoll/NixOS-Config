@@ -5,8 +5,8 @@ Run this command to ensure git, curl, vim & pciutils are installed: Note: or nan
 
 Clone this repo & CD into it:
 
-    git clone --depth 1 https://github.com/JaKooLit/NixOS-Hyprland.git ~/NixOS-Hyprland
-    cd ~/NixOS-Hyprland
+    git clone --depth 1 https://github.com/zylitcoll/NixOS-Config.git ~/NixOS-Config
+    cd ~/NixOS-Config
 
 You should stay in this directory for the rest of the install
 Create the host directory for your machine(s)
