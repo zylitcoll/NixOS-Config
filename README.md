@@ -8,10 +8,14 @@ Clone this repo & CD into it:
     git clone --depth 1 https://github.com/zylitcoll/NixOS-Config.git ~/NixOS-Config
     cd ~/NixOS-Config
 
+Remove the .git folder, so you can add it to your own repo later
+
+    rm -rf .git
+
 You should stay in this directory for the rest of the install
 Create the host directory for your machine(s)
 
-    cp -r hosts/default hosts/<your-desired-hostname>
+    cp -r hosts/NixOS hosts/<your-desired-hostname>
 
     
 Edit as required the config.nix , packages-fonts.nix and/or users.nix in hosts/<your-desired-hostname>/
