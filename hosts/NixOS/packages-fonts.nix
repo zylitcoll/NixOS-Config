@@ -85,10 +85,11 @@
     #(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
     ags # desktop overview  
     btop
+    libheif
     brightnessctl # for brightness control
     cava
     cliphist
-    gthumb
+    libsForQt5.gwenview
     gnome-system-monitor
     grim
     gtk-engine-murrine #for gtk themes
