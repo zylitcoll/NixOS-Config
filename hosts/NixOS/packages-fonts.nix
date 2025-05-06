@@ -89,7 +89,7 @@
     brightnessctl # for brightness control
     cava
     cliphist
-    libsForQt5.gwenview
+    nomacs
     gnome-system-monitor
     grim
     gtk-engine-murrine #for gtk themes
