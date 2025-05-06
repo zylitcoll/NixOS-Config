@@ -1,4 +1,3 @@
-
 Run this command to ensure git, curl, vim & pciutils are installed: Note: or nano if you prefer nano for editing
 
     nix-shell -p git vim curl pciutils
@@ -17,7 +16,6 @@ Create the host directory for your machine(s)
 
     cp -r hosts/NixOS hosts/<your-desired-hostname>
 
-    
 Edit as required the config.nix , packages-fonts.nix and/or users.nix in hosts/<your-desired-hostname>/
 then generate your hardware.nix with:
 
@@ -25,5 +23,5 @@ then generate your hardware.nix with:
 
 Run this to enable flakes and install the flake replacing hostname with whatever you put as the hostname:
 
-    NIX_CONFIG="experimental-features = nix-command flakes" 
+    NIX_CONFIG="experimental-features = nix-command flakes"
     sudo nixos-rebuild switch --flake .#hostname
