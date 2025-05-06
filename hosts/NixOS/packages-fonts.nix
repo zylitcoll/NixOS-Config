@@ -42,6 +42,11 @@
 
     fastfetch
     (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
+
+    #music player
+    mpd
+    mpc-cli
+    ncmpcpp
     #ranger
 
     #aplikasi multimedia
@@ -83,7 +88,7 @@
     brightnessctl # for brightness control
     cava
     cliphist
-    loupe
+    gthumb
     gnome-system-monitor
     grim
     gtk-engine-murrine #for gtk themes
