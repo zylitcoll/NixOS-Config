@@ -77,6 +77,7 @@
     php82Packages.composer
     lua
     stylua
+    android-tools
 
 
 
