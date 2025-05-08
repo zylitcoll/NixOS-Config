@@ -58,6 +58,9 @@
     #data manager 
     keepassxc
 
+    #games
+    pcsx2
+
     #office
     unstablePkgs.libreoffice-fresh
     zotero
