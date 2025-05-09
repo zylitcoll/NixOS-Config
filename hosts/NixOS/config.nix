@@ -51,7 +51,9 @@
     loader.efi = {
 	    #efiSysMountPoint = "/efi"; #this is if you have separate /efi partition
 	    canTouchEfiVariables = true;
-  	  };
+  	};
+
+    loader.systemd-boot.configurationLimit = 2;
 
     loader.timeout = 5;    
   			
