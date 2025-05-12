@@ -21,13 +21,11 @@ in
         intel-media-driver
         libvdpau-va-gl
         libva
-			  libva-utils
         intel-media-sdk       #  SDK untuk Intel Quick Sync (diperlukan OBS Studio/QSV encoder)
         intel-compute-runtime #  OpenCL support (untuk komputasi GPU/machine learning)
         # Vulkan Support
         vulkan-loader        # Loader Vulkan dasar
         vulkan-validation-layers  # Tools debugging (opsional)
-        vulkan-tools
       ];
 
       # Dukungan 32-bit (untuk aplikasi seperti Wine/Steam)

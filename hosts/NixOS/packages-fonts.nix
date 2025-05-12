@@ -69,6 +69,11 @@
     #sosial media 
     telegram-desktop
 
+    #grafix tool 
+    vulkan-tools
+    mesa-demos
+    libva-utils
+
 
     #tool bahasa programs
     gh 
