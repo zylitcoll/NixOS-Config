@@ -81,6 +81,7 @@
     lua
     stylua
     android-tools
+    mongodb-compass
 
 
 
