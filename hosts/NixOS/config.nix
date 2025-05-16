@@ -53,7 +53,7 @@
 	    canTouchEfiVariables = true;
   	};
 
-    loader.systemd-boot.configurationLimit = 2;
+    #loader.systemd-boot.configurationLimit = 2;
 
     loader.timeout = 5;    
   			
