@@ -334,9 +334,9 @@
   #mongodb
   services.mongodb = {
     enable = true;
-    package = "mongodb-ce";
-    enableAuth = false;
-    bind_ip = "127.0.0.1";
+    package = pkgs.mongodb-ce;
+    enableAuth = false; # <-- nonaktifkan sementara dulu
+    bind_ip = "127.0.0.1"; # hanya lokal sementara
   };
 
   # OpenGL
