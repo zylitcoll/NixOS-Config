@@ -315,12 +315,24 @@
 
   # Virtualization / Containers
   virtualisation.libvirtd.enable = true;
+
+  #Docker
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+    extraPackages = with pkgs; [
+      docker-compose  # Pastikan docker-compose ada di sini
+    ];
+  };
+
   virtualisation.podman = {
     enable = false;
     dockerCompat = false;
     defaultNetwork.settings.dns_enabled = false;
   };
 
+  #mongodb
+  services.mongodb.enable = true;
 
   # OpenGL
   hardware.graphics = {

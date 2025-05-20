@@ -229,16 +229,6 @@
 	
   };
 
-
-  #Docker
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = true;
-    extraPackages = with pkgs; [
-      docker-compose  # Pastikan docker-compose ada di sini
-    ];
-  };
-
   # Extra Portal Configuration
   xdg.portal = {
     enable = true;
