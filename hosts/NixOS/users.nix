@@ -28,13 +28,13 @@ in
     packages = with pkgs; [
       ];
     };
-    
+
     defaultUserShell = pkgs.zsh;
-  }; 
-  
+  };
+
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [ lsd fzf ]; 
-    
+
   programs = {
   # Zsh configuration
 	  zsh = {
@@ -45,10 +45,10 @@ in
         plugins = ["git"];
         theme = "fox"; 
       	};
-      
+
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
-      
+
       promptInit = ''
         fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
 

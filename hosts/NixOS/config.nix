@@ -1,13 +1,11 @@
 # Main default config
 
-
 # NOTE!!! : Packages and Fonts are configured in packages-&-fonts.nix
 
-
 { config, pkgs, host, username, options, lib, inputs, system, ...}: let
-  
+
   inherit (import ./variables.nix) keyboardLayout;
-    
+
   in {
   imports = [
     ./hardware.nix
@@ -28,12 +26,12 @@
       "systemd.mask=dev-tpmrm0.device" #this is to mask that stupid 1.5 mins systemd bug
       "nowatchdog" 
       "modprobe.blacklist=iTCO_wdt" #watchdog for Intel
- 	  ];
+    ];
 
     # This is for OBS Virtual Cam Support
     #kernelModules = [ "v4l2loopback" ];
     #  extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
-    
+
     initrd = { 
       availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
       kernelModules = [ ];
@@ -47,7 +45,7 @@
     ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub  
     # Bootloader SystemD
     loader.systemd-boot.enable = true;
-  
+
     loader.efi = {
 	    #efiSysMountPoint = "/efi"; #this is if you have separate /efi partition
 	    canTouchEfiVariables = true;
@@ -56,7 +54,7 @@
     #loader.systemd-boot.configurationLimit = 2;
 
     loader.timeout = 5;    
-  			
+
     # Bootloader GRUB
     #loader.grub = {
 	    #enable = true;
@@ -72,15 +70,12 @@
 
     ## -end of BOOTLOADERS----- ##
 
-
-    
-  
     # Make /tmp a tmpfs
     tmp = {
       useTmpfs = false;
       tmpfsSize = "30%";
       };
-    
+
     # Appimage Support
     binfmt.registrations.appimage = {
       wrapInterpreterInShell = false;
@@ -90,7 +85,7 @@
       mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
       magicOrExtension = ''\x7fELF....AI\x02'';
       };
-    
+
     plymouth.enable = true;
   };
 
@@ -113,7 +108,7 @@
 
   # Set your time zone.
   # services.automatic-timezoned.enable = true; #based on IP location
-  
+
   #https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
    time.timeZone = "Asia/Jakarta"; # Set local timezone
 
@@ -142,7 +137,7 @@
         variant = "";
       };
     };
-    
+
     greetd = {
       enable = true;
       vt = 3;
@@ -153,12 +148,12 @@
         };
       };
     };
-    
+
     smartd = {
       enable = false;
       autodetect = true;
     };
-    
+
 	  gvfs.enable = true;
 	  tumbler.enable = true;
 
@@ -179,41 +174,40 @@
       enable = true;
       interval = "weekly";
       };
-  
+
     libinput.enable = true;
 
     rpcbind.enable = false;
     nfs.server.enable = false;
-  
+
     openssh.enable = true;
     flatpak.enable = false;
 	
   	blueman.enable = true;
-  	
+	
   	#hardware.openrgb.enable = true;
   	#hardware.openrgb.motherboard = "amd";
 
 	  fwupd.enable = true;
 
 	  upower.enable = true;
-    
+
     gnome.gnome-keyring.enable = true;
-    
     printing = {
      enable = true;
      # drivers = [
      #    pkgs.hplipWithPlugin
      # ];
     };
-    
+
     #avahi = {
     #  enable = true;
     #  nssmdns4 = true;
     #  openFirewall = true;
     #};
-    
+
     #ipp-usb.enable = true;
-    
+
     #syncthing = {
     #  enable = false;
     #  user = "${username}";
@@ -222,7 +216,7 @@
     #};
 
   };
-  
+
   systemd.services.flatpak-repo = {
     path = [ pkgs.flatpak ];
     script = ''
