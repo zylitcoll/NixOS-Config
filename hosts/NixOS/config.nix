@@ -332,7 +332,12 @@
   };
 
   #mongodb
-  services.mongodb.enable = true;
+  services.mongodb = {
+    enable = true;
+    package = "mongodb-ce";
+    enableAuth = false;
+    bind_ip = "127.0.0.1";
+  };
 
   # OpenGL
   hardware.graphics = {

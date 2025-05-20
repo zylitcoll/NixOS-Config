@@ -1,6 +1,5 @@
 {
-  description = "My-NixOS"; 
-  	
+  description = "My-NixOS";
   inputs = {
 	nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   	#nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -11,42 +10,42 @@
 	ags.url = "github:aylur/ags/v1"; # aylurs-gtk-shell-v1
   	};
 
-  outputs = 
+  outputs =
 	inputs@{ self, nixpkgs, unstable, ... }:
-    	let
+    let
       system = "x86_64-linux";
       host = "NixOS";
       username = "why";
 
     pkgs = import nixpkgs {
-       	inherit system;
-       	config = {
-       	allowUnfree = true;
-       	};
+      inherit system;
+      config = {
+        allowUnfree = true;
       };
+    };
 
     unstablePkgs = import unstable {
-        inherit system;
-        config = {
+      inherit system;
+      config = {
         allowUnfree = true;
-        };
-    };    
+      };
+    };
 
     in
       {
 	nixosConfigurations = {
       "${host}" = nixpkgs.lib.nixosSystem rec {
-		specialArgs = { 
+		specialArgs = {
 			inherit system;
 			inherit inputs;
 			inherit username;
 			inherit host;
       inherit unstablePkgs;
 			};
-	   		modules = [ 
-				./hosts/${host}/config.nix 
-				# inputs.distro-grub-themes.nixosModules.${system}.default
-				];
+	  modules = [
+			./hosts/${host}/config.nix 
+			# inputs.distro-grub-themes.nixosModules.${system}.default
+			];
 			};
 		};
 	};
