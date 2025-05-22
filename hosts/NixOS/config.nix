@@ -308,7 +308,7 @@
   };
 
   virtualisation = {
-     # Virtualization / Containers
+    # Virtualization / Containers
     libvirtd.enable = true;
 
     #Docker
