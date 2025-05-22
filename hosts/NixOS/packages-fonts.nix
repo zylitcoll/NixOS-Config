@@ -54,11 +54,13 @@
     gimp-with-plugins
     inkscape-with-extensions
     libsForQt5.kdenlive
+    handbrake
 
     #data manager 
     keepassxc
 
     #games
+    ppsspp-sdl-wayland
     pcsx2
     mcpelauncher-client
     mcpelauncher-ui-qt
