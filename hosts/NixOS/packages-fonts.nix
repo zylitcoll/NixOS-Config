@@ -60,6 +60,7 @@
 
     #games
     pcsx2
+    mcpelauncher-client
     mcpelauncher-ui-qt
 
     #office
