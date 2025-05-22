@@ -176,13 +176,10 @@
       };
 
     libinput.enable = true;
-
     rpcbind.enable = false;
     nfs.server.enable = false;
-
     openssh.enable = true;
-    flatpak.enable = false;
-	
+    flatpak.enable = true;
   	blueman.enable = true;
 	
   	#hardware.openrgb.enable = true;

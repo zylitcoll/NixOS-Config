@@ -62,8 +62,6 @@
     #games
     ppsspp-sdl-wayland
     pcsx2
-    mcpelauncher-client
-    mcpelauncher-ui-qt
 
     #office
     unstablePkgs.libreoffice-fresh
