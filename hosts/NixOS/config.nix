@@ -179,7 +179,7 @@
     rpcbind.enable = false;
     nfs.server.enable = false;
     openssh.enable = true;
-    flatpak.enable = true;
+    flatpak.enable = false;
   	blueman.enable = true;
 	
   	#hardware.openrgb.enable = true;
