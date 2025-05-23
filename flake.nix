@@ -1,14 +1,16 @@
 {
   description = "My-NixOS";
   inputs = {
-	nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+	  nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   	#nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  unstable.url = "github:NixOS/nixpkgs/nixos-unstable";  # untuk LibreOffice saja
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";  # untuk LibreOffice saja
 	
-	#hyprland.url = "github:hyprwm/Hyprland"; # hyprland development
-	#distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
-	ags.url = "github:aylur/ags/v1"; # aylurs-gtk-shell-v1
-  	};
+	  #hyprland.url = "github:hyprwm/Hyprland"; # hyprland development
+	  #distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
+	  ags.url = "github:aylur/ags/v1"; # aylurs-gtk-shell-v1
+
+    hyprland-qt-style.url = "github:hyprwm/hyprland-qt-support";
+  };
 
   outputs =
 	inputs@{ self, nixpkgs, unstable, ... }:

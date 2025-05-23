@@ -92,7 +92,8 @@
 
     # Hyprland Stuff
     #(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
-    ags # desktop overview  
+    inputs.hyprland-qt-style.packages.${pkgs.system}.default
+    ags # desktop overview
     btop
     libheif
     brightnessctl # for brightness control
