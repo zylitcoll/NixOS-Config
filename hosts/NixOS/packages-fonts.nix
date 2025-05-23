@@ -13,6 +13,11 @@
         ]
     );
 
+    hyprQtSupport = pkgs.symlinkJoin {
+      name = "hyprland-qt-style";
+      paths = [ inputs.hyprland-qt-style.packages.${pkgs.system}.default ];
+  };
+
   in {
 
   nixpkgs.config.allowUnfree = true;
@@ -92,7 +97,7 @@
 
     # Hyprland Stuff
     #(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
-    inputs.hyprland-qt-style.packages.${pkgs.system}.default
+    hyprQtSupport
     ags # desktop overview
     btop
     libheif
@@ -139,6 +144,8 @@
   ]) ++ [
 	  python-packages
   ];
+
+  environment.sessionVariables.QML_IMPORT_PATH = "${hyprQtSupport}/lib/qt-6/qml";
 
   # FONTS
   fonts.packages = with pkgs; [
