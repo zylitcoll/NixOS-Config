@@ -157,6 +157,7 @@
 	  gvfs.enable = true;
 	  tumbler.enable = true;
 
+    pulseaudio.enable = false;
 	  pipewire = {
       enable = true;
       alsa.enable = true;
@@ -244,8 +245,6 @@
   # Extra Logitech Support
   hardware.logitech.wireless.enable = false;
   hardware.logitech.wireless.enableGraphical = false;
-
-  hardware.pulseaudio.enable = false; # stable branch
 
   # Bluetooth
   hardware = {

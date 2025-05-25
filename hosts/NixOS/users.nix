@@ -32,6 +32,10 @@ in
     defaultUserShell = pkgs.zsh;
   };
 
+  environment.sessionVariables = {
+    QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
+  };
+
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [ lsd fzf ]; 
 

@@ -51,9 +51,9 @@
 
     #aplikasi multimedia
     google-chrome
-    gimp-with-plugins
+    gimp3-with-plugins
     inkscape-with-extensions
-    libsForQt5.kdenlive
+    kdePackages.kdenlive
     handbrake
 
     #data manager 
@@ -82,7 +82,7 @@
     #tool bahasa programs
     gh 
     jdk21_headless
-    nodejs_23
+    nodejs_24
     nodePackages_latest.prettier
     pnpm_10
     php 
@@ -95,13 +95,13 @@
     # Hyprland Stuff
     #(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
     hyprland-qt-support
-    ags # desktop overview
+    ags_1 # desktop overview
     btop
     libheif
     brightnessctl # for brightness control
     cava
     cliphist
-    nomacs
+    loupe
     gnome-system-monitor
     grim
     gtk-engine-murrine #for gtk themes
@@ -152,12 +152,9 @@
     font-awesome
     terminus_font
     victor-mono
-    (nerdfonts.override {fonts = ["JetBrainsMono"];}) # stable banch
-    (nerdfonts.override {fonts = ["FantasqueSansMono"];}) # stable banch
-
-    #nerd-fonts.jetbrains-mono # unstable 
-    #nerd-fonts.fira-code # unstable
-    #nerd-fonts.fantasque-sans-mono #unstable
+    nerd-fonts.jetbrains-mono # unstable 
+    nerd-fonts.fira-code # unstable
+    nerd-fonts.fantasque-sans-mono #unstable
   ];
 
   programs = {
