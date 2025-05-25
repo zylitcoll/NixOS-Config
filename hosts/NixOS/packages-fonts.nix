@@ -1,6 +1,6 @@
 # Packages and Fonts config including the "programs" options
 
-{ pkgs, inputs, unstablePkgs, ...}: let
+{ pkgs, inputs, ...}: let
 
   python-packages = pkgs.python3.withPackages (
     ps:
@@ -12,11 +12,6 @@
         pyquery # needed for hyprland-dots Weather script
         ]
     );
-
-    hyprQtSupport = pkgs.symlinkJoin {
-      name = "hyprland-qt-style";
-      paths = [ inputs.hyprland-qt-style.packages.${pkgs.system}.default ];
-  };
 
   in {
 
@@ -71,7 +66,7 @@
     mcpelauncher-ui-qt
 
     #office
-    unstablePkgs.libreoffice-fresh
+    libreoffice-fresh
     zotero
     anytype
 
@@ -99,7 +94,7 @@
 
     # Hyprland Stuff
     #(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
-    hyprQtSupport
+    hyprland-qt-support
     ags # desktop overview
     btop
     libheif
@@ -146,8 +141,6 @@
   ]) ++ [
 	  python-packages
   ];
-
-  environment.sessionVariables.QML_IMPORT_PATH = "${hyprQtSupport}/lib/qt-6/qml";
 
   # FONTS
   fonts.packages = with pkgs; [
