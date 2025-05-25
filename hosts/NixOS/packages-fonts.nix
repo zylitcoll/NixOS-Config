@@ -65,8 +65,9 @@
     keepassxc
 
     #games
-    ppsspp-sdl-wayland
-    pcsx2
+    ppsspp
+    gzdoom
+    dolphin-emu
     mcpelauncher-ui-qt
 
     #office
