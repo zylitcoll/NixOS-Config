@@ -12,7 +12,6 @@
     ./users.nix
     ./packages-fonts.nix
     ../../modules/intel-drivers.nix
-    ../../modules/vm-guest-services.nix
     ../../modules/local-hardware-clock.nix
   ];
 
@@ -98,7 +97,6 @@
 
   # Extra Module Options
   drivers.intel.enable = true;
-  vm.guest-services.enable = false;
   local.hardware-clock.enable = false;
 
   # networking
