@@ -1,3 +1,4 @@
+# 💫 https://github.com/JaKooLit 💫 #
 # Packages and Fonts config including the "programs" options
 
 { pkgs, inputs, ...}: let
@@ -55,6 +56,7 @@
     inkscape-with-extensions
     kdePackages.kdenlive
     handbrake
+    obs-studio
 
     #data manager 
     keepassxc
@@ -170,27 +172,6 @@
       portalPackage = pkgs.xdg-desktop-portal-hyprland; # xdph none git
   	  xwayland.enable = true;
     };
-
-    obs-studio = {
-      enable = true;
-      # plugins = with pkgs.obs-studio-plugins; [
-      #   # Plugin untuk Wayland (jika digunakan)
-        # wlrobs
-      #   obs-backgroundremoval
-      #   # Plugin capture untuk Intel
-        # obs-vaapi              # VAAPI encoder/decoder untuk Intel iGPU
-      #   obs-vkcapture          # Vulkan capture (bisa bekerja dengan Intel)
-      #   # Plugin umum yang berguna
-      #   obs-pipewire-audio-capture  # Audio capture via PipeWire
-      #   obs-gstreamer              # Dukungan GStreamer
-      #   obs-nvfbc                  # Frame Buffer Capture (alternatif)
-      #   # Plugin output/encoding
-      #   obs-ndi                   # NDI support
-      #   obs-websocket             # Remote control via WebSocket
-      # ];
-    };
-
-
 	
 	  waybar.enable = true;
 	  hyprlock.enable = true;

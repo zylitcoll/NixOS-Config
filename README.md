@@ -1,3 +1,10 @@
+## Credits
+
+This configuration is based on [@JaKooLit](https://github.com/JaKooLit/NixOS-Hyprland).  
+All credits go to them for the base structure and initial inspiration.
+
+this config Modified for intel only
+
 Run this command to ensure git, curl, vim & pciutils are installed: Note: or nano if you prefer nano for editing
 
     nix-shell -p git vim curl pciutils

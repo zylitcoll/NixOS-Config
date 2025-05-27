@@ -1,3 +1,5 @@
+# This configuration is based on https://github.com/JaKooLit/NixOS-Hyprland
+# Modified by @zylitcoll for personal daily use.
 {
   description = "My-NixOS";
   inputs = {

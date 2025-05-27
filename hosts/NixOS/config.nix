@@ -1,5 +1,5 @@
+# 💫 https://github.com/JaKooLit 💫 #
 # Main default config
-
 # NOTE!!! : Packages and Fonts are configured in packages-&-fonts.nix
 
 { config, pkgs, host, username, options, lib, inputs, system, ...}: let
@@ -12,7 +12,6 @@
     ./users.nix
     ./packages-fonts.nix
     ../../modules/intel-drivers.nix
-    ../../modules/vm-guest-services.nix
     ../../modules/local-hardware-clock.nix
   ];
 
@@ -98,7 +97,6 @@
 
   # Extra Module Options
   drivers.intel.enable = true;
-  vm.guest-services.enable = false;
   local.hardware-clock.enable = false;
 
   # networking
