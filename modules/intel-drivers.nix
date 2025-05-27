@@ -25,20 +25,7 @@ in
         intel-compute-runtime #  OpenCL support (untuk komputasi GPU/machine learning)
         # Vulkan Support
         vulkan-loader        # Loader Vulkan dasar
-        vulkan-validation-layers  # Tools debugging (opsional)
-      ];
-
-      # Dukungan 32-bit (untuk aplikasi seperti Wine/Steam)
-      extraPackages32 = with pkgs.pkgsi686Linux; [ 
-        libva  # VA-API versi 32-bit
       ];
     };
-
-    # Variabel environment kritis
-    # environment.variables = {
-    #   LIBVA_DRIVER_NAME = "i965";  #  Paksa pakai driver Intel modern ("iHD" untuk Gen 8+, "i965" untuk Gen 4-7)
-    #   VDPAU_DRIVER = "va_gl";     #  Gunakan VA-API sebagai backend VDPAU (untuk game/aplikasi berbasis VDPAU)
-    # };
-
   };
 }

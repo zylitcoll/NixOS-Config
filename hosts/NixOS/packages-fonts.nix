@@ -60,6 +60,7 @@
     keepassxc
 
     #games
+    pcsx2
     ppsspp
     gzdoom
     dolphin-emu
@@ -72,6 +73,10 @@
 
     #sosial media 
     telegram-desktop
+
+    #wine 
+    wineWowPackages.stable
+    winetricks
 
     #grafix tool 
     vulkan-tools
