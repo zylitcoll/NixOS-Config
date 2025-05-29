@@ -28,11 +28,11 @@
     cpufrequtils
     duf
     findutils
-    ffmpeg   
+    ffmpeg
     glib #for gsettings to work
     gsettings-qt
     git
-    killall  
+    killall
     libappindicator
     libnotify
     openssl #required by Rainbow borders
@@ -75,6 +75,7 @@
 
     #sosial media 
     telegram-desktop
+    discord
 
     #wine 
     wineWowPackages.stable
@@ -100,7 +101,6 @@
     mongodb-compass
 
     # Hyprland Stuff
-    #(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
     hyprland-qt-support
     ags_1 # desktop overview
     btop
@@ -159,9 +159,9 @@
     font-awesome
     terminus_font
     victor-mono
-    nerd-fonts.jetbrains-mono # unstable 
-    nerd-fonts.fira-code # unstable
-    nerd-fonts.fantasque-sans-mono #unstable
+    nerd-fonts.jetbrains-mono 
+    nerd-fonts.fira-code
+    nerd-fonts.fantasque-sans-mono
   ];
 
   programs = {
