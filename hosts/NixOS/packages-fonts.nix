@@ -40,6 +40,7 @@
     wget
     xdg-user-dirs
     xdg-utils
+    udiskie
 
     fastfetch
     (mpv.override {scripts = [mpvScripts.mpris];}) # with tray

@@ -152,8 +152,9 @@
       autodetect = true;
     };
 
-	  gvfs.enable = true;
-	  tumbler.enable = true;
+    tumbler.enable = true;
+    udisks2.enable = true;
+    gvfs.enable = true;
 
     pulseaudio.enable = false;
 	  pipewire = {
