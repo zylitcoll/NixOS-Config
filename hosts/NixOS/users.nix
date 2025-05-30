@@ -19,11 +19,13 @@ in
         "libvirtd"
         "scanner"
         "lp"
-        "video" 
-        "input" 
+        "video"
+        "input"
         "audio"
         "docker"
-      ];
+        "storage"
+        "plugdev"
+        ];
 
     # define user packages here
     packages = with pkgs; [

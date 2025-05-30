@@ -38,7 +38,9 @@
 
     # Needed For Some Steam Games
     kernel.sysctl = {
-     "vm.max_map_count" = 2147483642;
+      "vm.dirty_bytes" = 1048576;
+      "vm.dirty_background_bytes" = 512000;
+      "vm.max_map_count" = 2147483642;
     };
 
     ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub  
@@ -153,7 +155,7 @@
     };
 
     tumbler.enable = true;
-    udisks2.enable = true;
+    devmon.enable = true;
     gvfs.enable = true;
 
     pulseaudio.enable = false;
