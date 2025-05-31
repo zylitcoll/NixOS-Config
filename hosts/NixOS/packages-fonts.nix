@@ -67,6 +67,7 @@
     gzdoom
     dolphin-emu
     mcpelauncher-ui-qt
+    heroic
 
     #office
     libreoffice-fresh
