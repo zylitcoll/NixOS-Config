@@ -87,6 +87,9 @@
     mesa-demos
     libva-utils
 
+    #tool
+    johnny
+
 
     #tool bahasa programs
     gh 
@@ -136,7 +139,7 @@
     swappy
     swaynotificationcenter
     swww
-    unzip
+    p7zip
     wallust
     wl-clipboard
     wlogout
