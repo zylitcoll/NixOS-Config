@@ -139,7 +139,9 @@
     swappy
     swaynotificationcenter
     swww
+    unzip
     p7zip
+    unrar
     wallust
     wl-clipboard
     wlogout
