@@ -308,6 +308,9 @@
     # Virtualization / Containers
     libvirtd.enable = true;
 
+    #waydroid
+    waydroid.enable = true;
+
     #Docker
     docker = {
       enable = true;
