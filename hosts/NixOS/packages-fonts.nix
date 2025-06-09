@@ -45,10 +45,7 @@
     (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
 
     #music player
-    mpd
-    mpc-cli
-    ncmpcpp
-    #ranger
+    libsForQt5.elisa
 
     #aplikasi multimedia
     google-chrome
@@ -149,9 +146,6 @@
     file-roller
     yad
     yt-dlp
-
-    #waybar  # if wanted experimental next line
-    #(pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];}))
   ]) ++ [
 	  python-packages
   ];
@@ -229,6 +223,6 @@
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal
     ];
-    };
+  };
 
-  }
+}
