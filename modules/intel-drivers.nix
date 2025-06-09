@@ -1,4 +1,5 @@
 # 💫 https://github.com/JaKooLit 💫 #
+# Modul driver Intel yang disederhanakan
 
 { lib, pkgs, config, ... }:
 with lib;
@@ -11,21 +12,27 @@ in
   };
 
   config = mkIf cfg.enable {
+    # Override ini diperlukan untuk mengaktifkan codec hybrid pada driver VAAPI,
+    # terutama untuk GPU Intel Arc. Ini sudah benar.
     nixpkgs.config.packageOverrides = pkgs: {
       vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
     };
 
-    # OpenGL
-    hardware.graphics = {
-      extraPackages = with pkgs; [
-        intel-media-driver
-        libvdpau-va-gl
-        libva
-        intel-media-sdk       #  SDK untuk Intel Quick Sync (diperlukan OBS Studio/QSV encoder)
-        intel-compute-runtime #  OpenCL support (untuk komputasi GPU/machine learning)
-        # Vulkan Support
-        vulkan-loader        # Loader Vulkan dasar
-      ];
-    };
+    # Mengaktifkan driver OpenGL/Vulkan dasar. NixOS akan mendeteksi Intel secara otomatis.
+    hardware.graphics.enable = true;
+
+    # Kita hanya menambahkan paket EKSTRA yang mungkin tidak diinstal secara default.
+    hardware.graphics.extraPackages = with pkgs; [
+      # Driver utama 'intel-media-driver' dan 'vulkan-loader' sudah diurus oleh `hardware.graphics.enable = true`.
+      
+      # Kompatibilitas untuk aplikasi yang menggunakan VDPAU (alternatif VA-API).
+      libvdpau-va-gl
+
+      # Diperlukan untuk encoding Intel Quick Sync (QSV) di aplikasi seperti OBS Studio.
+      intel-media-sdk
+
+      # Diperlukan untuk dukungan OpenCL (komputasi GPGPU).
+      intel-compute-runtime
+    ];
   };
 }

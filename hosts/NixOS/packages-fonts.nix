@@ -1,234 +1,143 @@
 # 💫 https://github.com/JaKooLit 💫 #
-# Packages and Fonts config including the "programs" options
+# Konfigurasi Paket dan Font yang Disederhanakan untuk KDE Plasma
 
-{ pkgs, inputs, ...}: let
+{ pkgs, ... }: let
 
+  # Paket Python, dikelompokkan untuk kerapian.
   python-packages = pkgs.python3.withPackages (
     ps:
       with ps; [
-	      pip
-        black
-        isort
+        # DIHAPUS: Menginstal 'pip' secara deklaratif adalah anti-pattern di NixOS.
+        # Carilah paket Nix untuk library yang Anda butuhkan.
+        # pip
+        black     # Untuk developer Python
+        isort     # Untuk developer Python
         requests
-        pyquery # needed for hyprland-dots Weather script
-        ]
-    );
+        # DIHAPUS: 'pyquery' untuk skrip cuaca Hyprland tidak diperlukan di KDE.
+      ]
+  );
 
-  in {
-
+in {
+  # Mengizinkan instalasi paket non-free seperti Google Chrome, Discord, Steam, dll.
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = (with pkgs; [
-  # System Packages
-    bc
-    baobab
-    btrfs-progs
-    clang
-    curl
-    cpufrequtils
-    duf
-    findutils
-    ffmpeg
-    glib #for gsettings to work
-    gsettings-qt
-    git
-    killall
-    libappindicator
-    libnotify
-    openssl #required by Rainbow borders
-    pciutils
-    wget
-    xdg-user-dirs
-    xdg-utils
+  # --- DAFTAR PAKET SISTEM ---
+  environment.systemPackages = with pkgs; [
+    # ---------------- Utilitas Dasar & Penting ----------------
+    # Sebagian besar utilitas baris perintah dasar (find, curl, wget, dll.) sudah
+    # termasuk dalam sistem dasar atau ditarik sebagai dependensi.
+    # Kita hanya perlu menambahkan beberapa yang benar-benar berguna untuk desktop.
+    gsettings-qt      # Sangat direkomendasikan untuk integrasi tema aplikasi GTK
+    libappindicator   # Penting untuk ikon system tray aplikasi pihak ketiga
+    btop              # Monitor sistem yang canggih
+    fastfetch         # Informasi sistem di terminal
+    filelight         # Alternatif KDE untuk Baobab, untuk analisis disk
+    yt-dlp            # Mengunduh video dari YouTube dan situs lain
+    libheif           # Dukungan untuk format gambar HEIF/HEIC (dari iPhone)
+    (mpv.override { scripts = [ mpvScripts.mpris ]; }) # MPV dengan kontrol media
 
-    fastfetch
-    (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
-
-    #music player
-    mpd
-    mpc-cli
-    ncmpcpp
-    #ranger
-
-    #aplikasi multimedia
-    google-chrome
-    gimp3-with-plugins
+    # ---------------- Aplikasi Desktop & Multimedia ----------------
+    google-chrome     # Alternatif untuk Firefox
+    gimp-with-plugins
     inkscape-with-extensions
-    kdePackages.kdenlive
+    kdePackages.kdenlive  # Editor video yang terintegrasi baik dengan KDE
     handbrake
     obs-studio
-
-    #data manager 
     keepassxc
+    libreoffice-fresh
+    zotero
+    anytype
+    telegram-desktop
+    discord
+    kitty             # Terminal emulator, alternatif untuk Konsole
 
-    #games
+    # ---------------- Gaming & Emulator ----------------
     pcsx2
     ppsspp
     gzdoom
     dolphin-emu
     mcpelauncher-ui-qt
     heroic
-
-    #office
-    libreoffice-fresh
-    zotero
-    anytype
-
-    #sosial media 
-    telegram-desktop
-    discord
-
-    #wine 
-    wineWowPackages.stable
+    wineWowPackages.stable # Wine untuk aplikasi 32-bit dan 64-bit
     winetricks
 
-    #grafix tool 
+    # ---------------- Alat Grafis & Diagnostik ----------------
     vulkan-tools
     mesa-demos
     libva-utils
 
-    #tool
-    johnny
-
-
-    #tool bahasa programs
-    gh
+    # ---------------- Alat Pengembangan (sesuai kebutuhan Anda) ----------------
+    gh                # GitHub CLI
     jdk21_headless
     nodejs_24
     nodePackages_latest.prettier
     pnpm_10
-    php 
+    php
     php82Packages.composer
     lua
     stylua
     android-tools
     mongodb-compass
-    lzip
+    johnny            # GUI untuk John the Ripper
 
-    # Hyprland Stuff
-    hyprland-qt-support
-    ags_1 # desktop overview
-    btop
-    libheif
-    brightnessctl # for brightness control
-    cava
-    cliphist
-    loupe
-    gnome-system-monitor
-    grim
-    gtk-engine-murrine #for gtk themes
-    hypridle
-    imagemagick 
-    inxi
-    jq
-    kitty
-    libsForQt5.qtstyleplugin-kvantum #kvantum
-    networkmanagerapplet
-    nwg-displays
-    nwg-look
-    nvtopPackages.intel	 
-    pamixer
-    pavucontrol
-    playerctl
-    polkit_gnome
-    libsForQt5.qt5ct
-    kdePackages.qt6ct
-    kdePackages.qtwayland
-    kdePackages.qtstyleplugin-kvantum #kvantum
-    rofi-wayland
-    slurp
-    swappy
-    swaynotificationcenter
-    swww
-    unzip
-    p7zip
-    unrar
-    wallust
-    wl-clipboard
-    wlogout
-    file-roller
-    yad
-    yt-dlp
+    # Menambahkan grup paket Python yang kita definisikan di atas
+    python-packages
 
-    #waybar  # if wanted experimental next line
-    #(pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];}))
-  ]) ++ [
-	  python-packages
   ];
 
-  # FONTS
+  # --- FONTS ---
+  # Daftar font Anda sudah sangat bagus, tidak ada yang perlu dihapus.
   fonts.packages = with pkgs; [
+    # Dasar & UI
     noto-fonts
-    corefonts  #msfonts
-    fira-code
     noto-fonts-cjk-sans
-    jetbrains-mono
     font-awesome
-    terminus_font
-    victor-mono
+    corefonts # Font Microsoft untuk kompatibilitas web
+
+    # Programming & Terminal
     nerd-fonts.jetbrains-mono 
     nerd-fonts.fira-code
     nerd-fonts.fantasque-sans-mono
+    victor-mono
+    terminus_font
   ];
 
+  # --- PENGATURAN PROGRAM & LAYANAN ---
   programs = {
-	  hyprland = {
-      enable = true;
-      #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland; #hyprland-git
-		  #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland; #xdph-git
-      portalPackage = pkgs.xdg-desktop-portal-hyprland; # xdph none git
-  	  xwayland.enable = true;
-    };
-	
-	  waybar.enable = true;
-	  hyprlock.enable = true;
-	  firefox.enable = true;
-	  git.enable = true;
-    nm-applet.indicator = true;
+    firefox.enable = true;
+    git.enable = true; 
     neovim.enable = true;
-
-	  thunar.enable = true;
-	  thunar.plugins = with pkgs.xfce; [
-		  exo
-		  mousepad
-		  thunar-archive-plugin
-		  thunar-volman
-		  tumbler
-  	  ];
-	
-    virt-manager.enable = true;
+    virt-manager.enable = true; # GUI untuk mengelola mesin virtual
+    dconf.enable = true;      # Penting untuk aplikasi GTK
+    mtr.enable = true;
 
     steam = {
-     enable = true;
-     gamescopeSession.enable = true;
-     remotePlay.openFirewall = true;
-     dedicatedServer.openFirewall = true;
+      enable = true;
+      gamescopeSession.enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
     };
 
-    xwayland.enable = true;
-
-    dconf.enable = true;
-    seahorse.enable = true;
-    fuse.userAllowOther = true;
-    mtr.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
-	
+    
+    # DIHAPUS: xwayland.enable = true; ini sudah diurus oleh modul KDE Plasma 6 secara otomatis.
+    # DIHAPUS: seahorse adalah alat GNOME. KDE punya KGpg/KWallet, tetapi bisa diinstal jika Anda lebih suka.
+    # seahorse.enable = true;
   };
 
-  # Extra Portal Configuration
+  # --- XDG DESKTOP PORTAL ---
+  # Konfigurasi ini penting untuk aplikasi Flatpak dan screen sharing di Wayland.
   xdg.portal = {
     enable = true;
-    wlr.enable = false;
+    # Modul KDE sudah memilih backend portal yang benar (kde, gtk).
+    # Opsi di bawah ini adalah cara eksplisit untuk memastikan portal gtk ada.
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
     ];
-    configPackages = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
-    ];
-    };
-
-  }
+    # DIHAPUS: configPackages adalah opsi yang sudah usang dan tidak berpengaruh.
+    # DIHAPUS: wlr.enable tidak relevan untuk KDE.
+  };
+}

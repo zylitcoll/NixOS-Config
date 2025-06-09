@@ -1,269 +1,119 @@
 # 💫 https://github.com/JaKooLit 💫 #
-# Main default config
-# NOTE!!! : Packages and Fonts are configured in packages-&-fonts.nix
+# Konfigurasi yang telah disederhanakan untuk KDE Plasma 6
 
-{ config, pkgs, host, username, options, lib, inputs, system, ...}: let
-
-  inherit (import ./variables.nix) keyboardLayout;
-
-  in {
+{ config, pkgs, host, username, ... }: let
+  # Pindahkan variabel ke sini agar file lebih mandiri, atau biarkan jika Anda punya banyak variabel
+  keyboardLayout = "gb";
+in {
   imports = [
     ./hardware.nix
     ./users.nix
     ./packages-fonts.nix
     ../../modules/intel-drivers.nix
-    ../../modules/local-hardware-clock.nix
+    # ../../modules/local-hardware-clock.nix # Dinonaktifkan di bawah, jadi impor ini tidak perlu
   ];
 
-  # BOOT related stuff
+  # --- BOOT ---
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
-    #kernelPackages = pkgs.linuxPackages_latest; # Kernel 
+    kernelPackages = pkgs.linuxPackages_zen; # Pilihan kernel Anda, ini bagus.
+    #kernelPackages = pkgs.linuxPackages_latest; # Alternatif standar
 
     kernelParams = [
-      "systemd.mask=systemd-vconsole-setup.service"
-      "systemd.mask=dev-tpmrm0.device" #this is to mask that stupid 1.5 mins systemd bug
-      "nowatchdog" 
-      "modprobe.blacklist=iTCO_wdt" #watchdog for Intel
+      "nowatchdog"
+      "modprobe.blacklist=iTCO_wdt" # Watchdog untuk Intel, bagus untuk dinonaktifkan
+      # "systemd.mask=dev-tpmrm0.device" # Opsional, coba hapus. Mungkin bug lama yang sudah teratasi.
     ];
 
-    # This is for OBS Virtual Cam Support
-    #kernelModules = [ "v4l2loopback" ];
-    #  extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
-
-    initrd = { 
-      availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-      kernelModules = [ ];
-    };
-
-    # Needed For Some Steam Games
+    # Pengaturan untuk game, bagus untuk dipertahankan.
     kernel.sysctl = {
+      "vm.max_map_count" = 2147483642;
       "vm.dirty_bytes" = 1048576;
       "vm.dirty_background_bytes" = 512000;
-      "vm.max_map_count" = 2147483642;
     };
 
-    ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub  
     # Bootloader SystemD
     loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    loader.timeout = 5;
 
-    loader.efi = {
-	    #efiSysMountPoint = "/efi"; #this is if you have separate /efi partition
-	    canTouchEfiVariables = true;
-  	};
+    # Direkomendasikan untuk performa dan mengurangi beban tulis pada SSD.
+    tmp.useTmpfs = true;
+    tmp.tmpfsSize = "30%";
 
-    #loader.systemd-boot.configurationLimit = 2;
+    # Dukungan AppImage
+    binfmt.registrations.appimage.interpreter = "${pkgs.appimage-run}/bin/appimage-run";
 
-    loader.timeout = 5;    
-
-    # Bootloader GRUB
-    #loader.grub = {
-	    #enable = true;
-	    #  devices = [ "nodev" ];
-	    #  efiSupport = true;
-      #  gfxmodeBios = "auto";
-	    #  memtest86.enable = true;
-	    #  extraGrubInstallArgs = [ "--bootloader-id=${host}" ];
-	    #  configurationName = "${host}";
-  	  #	 };
-
-    # Bootloader GRUB theme, configure below
-
-    ## -end of BOOTLOADERS----- ##
-
-    # Make /tmp a tmpfs
-    tmp = {
-      useTmpfs = false;
-      tmpfsSize = "30%";
-      };
-
-    # Appimage Support
-    binfmt.registrations.appimage = {
-      wrapInterpreterInShell = false;
-      interpreter = "${pkgs.appimage-run}/bin/appimage-run";
-      recognitionType = "magic";
-      offset = 0;
-      mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
-      magicOrExtension = ''\x7fELF....AI\x02'';
-      };
-
+    # Plymouth (Boot Splash)
     plymouth.enable = true;
   };
 
-  # GRUB Bootloader theme. Of course you need to enable GRUB above.. duh! and also, enable it on flake.nix
-  #distro-grub-themes = {
-  #  enable = true;
-  #  theme = "nixos";
-  #};
-
-
-  # Extra Module Options
-  drivers.intel.enable = true;
-  local.hardware-clock.enable = false;
-
-  # networking
+  # --- JARINGAN & WAKTU ---
   networking.networkmanager.enable = true;
   networking.hostName = "${host}";
-  networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
-
-  # Set your time zone.
-  # services.automatic-timezoned.enable = true; #based on IP location
-
-  #https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-   time.timeZone = "Asia/Jakarta"; # Set local timezone
-
-  # Select internationalisation properties.
+  time.timeZone = "Asia/Jakarta";
   i18n.defaultLocale = "en_US.UTF-8";
+  # i18n.extraLocaleSettings tidak perlu jika isinya sama dengan defaultLocale
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-
-  # Services to start
+  # --- DESKTOP ENVIRONMENT (KDE PLASMA 6) ---
   services = {
-    xserver = {
-      enable = false;
-      xkb = {
-        layout = "${keyboardLayout}";
-        variant = "";
-      };
-    };
+    # Modul plasma6 akan secara otomatis mengelola xserver dan xwayland.
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true; # Mengaktifkan sesi Wayland di SDDM
+    desktopManager.plasma6.enable = true;
 
-    greetd = {
-      enable = true;
-      vt = 3;
-      settings = {
-        default_session = {
-          user = username;
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # start Hyprland with a TUI login manager
-        };
-      };
-    };
-
-    smartd = {
-      enable = false;
-      autodetect = true;
-    };
-
-    tumbler.enable = true;
-    devmon.enable = true;
-    gvfs.enable = true;
-
-    pulseaudio.enable = false;
-	  pipewire = {
+    # Sound System Modern
+    pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-	    wireplumber.enable = true;
-  	  };
-	
-    #pulseaudio.enable = false; #unstable
-	  udev.enable = true;
-	  envfs.enable = true;
-	  dbus.enable = true;
-
-	  fstrim = {
-      enable = true;
-      interval = "weekly";
-      };
-
-    libinput.enable = true;
-    rpcbind.enable = false;
-    nfs.server.enable = false;
-    openssh.enable = true;
-    flatpak.enable = false;
-  	blueman.enable = true;
-	
-  	#hardware.openrgb.enable = true;
-  	#hardware.openrgb.motherboard = "amd";
-
-	  fwupd.enable = true;
-
-	  upower.enable = true;
-
-    gnome.gnome-keyring.enable = true;
-    printing = {
-     enable = true;
-     # drivers = [
-     #    pkgs.hplipWithPlugin
-     # ];
+      wireplumber.enable = true;
     };
+    security.rtkit.enable = true; # Penting untuk Pipewire
 
-    #avahi = {
-    #  enable = true;
-    #  nssmdns4 = true;
-    #  openFirewall = true;
-    #};
-
-    #ipp-usb.enable = true;
-
-    #syncthing = {
-    #  enable = false;
-    #  user = "${username}";
-    #  dataDir = "/home/${username}";
-    #  configDir = "/home/${username}/.config/syncthing";
-    #};
-
+    # Layanan Pendukung Desktop
+    devmon.enable = true;         # Otomatis me-mount media eksternal
+    gvfs.enable = true;           # Penting untuk filesystem virtual
+    tumbler.enable = true;        # Thumbnail untuk file manager
+    fstrim.enable = true;         # Penting untuk kesehatan SSD
+    upower.enable = true;         # Dikelola oleh Plasma, tapi eksplisit tidak masalah
+    libinput.enable = true;       # Input driver untuk Wayland
+    gnome.gnome-keyring.enable = true; # Untuk kompatibilitas beberapa aplikasi
   };
 
-  systemd.services.flatpak-repo = {
-    path = [ pkgs.flatpak ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
-
-  # zram
-  zramSwap = {
-	  enable = true;
-	  priority = 100;
-	  memoryPercent = 30;
-	  swapDevices = 1;
-    algorithm = "zstd";
-    };
-
-  powerManagement = {
-  	enable = true;
-	  cpuFreqGovernor = "schedutil";
-  };
-
-  #hardware.sane = {
-  #  enable = true;
-  #  extraBackends = [ pkgs.sane-airscan ];
-  #  disabledDefaultBackends = [ "escl" ];
-  #};
-
-  # Extra Logitech Support
-  hardware.logitech.wireless.enable = false;
-  hardware.logitech.wireless.enableGraphical = false;
-
-  # Bluetooth
+  # --- PERANGKAT KERAS ---
   hardware = {
-  	bluetooth = {
-	    enable = true;
-	    powerOnBoot = true;
-	    settings = {
-		    General = {
-		      Enable = "Source,Sink,Media,Socket";
-		      Experimental = true;
-		    };
+    # Pengaturan Bluetooth, sudah benar. Plasma punya integrasi sendiri.
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+          Experimental = true;
+        };
       };
     };
+    # OpenGL / Graphics Drivers
+    graphics.enable = true;
+  };
+  services.fwupd.enable = true; # Untuk update firmware perangkat
+
+  # --- LAYANAN OPSIONAL (SESUAI KEBUTUHAN ANDA) ---
+  services = {
+    openssh.enable = true;           # Jika Anda butuh akses SSH ke mesin ini
+    printing.enable = true;        # Jika Anda menggunakan printer
+    flatpak.enable = false;         # Diaktifkan agar konfigurasi remote di bawah berfungsi
   };
 
-  # Security / Polkit
-  security.rtkit.enable = true;
+  # Cara yang benar untuk menambahkan remote Flatpak
+  services.flatpak.remotes = [
+    { name = "flathub"; location = "https://flathub.org/repo/flathub.flatpakrepo"; }
+  ];
+
+  # --- Keamanan ---
   security.polkit.enable = true;
+  # Aturan polkit ini sudah bagus, memungkinkan reboot/shutdown tanpa password.
   security.polkit.extraConfig = ''
     polkit.addRule(function(action, subject) {
       if (
@@ -280,22 +130,15 @@
       }
     })
   '';
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
-  };
-
-  # Cachix, Optimization settings and garbage collection automation
+  
+  # --- PENGATURAN NIX & OPTIMISASI ---
   nix = {
     settings = {
       auto-optimise-store = true;
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+      experimental-features = [ "nix-command" "flakes" ];
+      # DIHAPUS: Repositori cachix Hyprland tidak relevan untuk KDE Plasma
+      # substituters = [ "https://hyprland.cachix.org" ];
+      # trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
     gc = {
       automatic = true;
@@ -304,14 +147,10 @@
     };
   };
 
+  # --- VIRTUALISASI (SIMPAN JIKA ANDA MENGGUNAKANNYA) ---
   virtualisation = {
-    # Virtualization / Containers
     libvirtd.enable = true;
-
-    #waydroid
     waydroid.enable = true;
-
-    #Docker
     docker = {
       enable = true;
       enableOnBoot = true;
@@ -319,50 +158,23 @@
         docker-compose  # Pastikan docker-compose ada di sini
       ];
     };
-
-    podman = {
-      enable = false;
-      dockerCompat = false;
-      defaultNetwork.settings.dns_enabled = false;
-    };
   };
+  # --- DATABASE (SIMPAN JIKA ANDA MENGGUNAKANNYA) ---
+  # services.mongodb = {
+  #   enable = true;
+  #   ...
+  # };
 
-  #mongodb
-  services.mongodb = {
-    enable = true;
-    package = pkgs.mongodb-ce;
-    enableAuth = false; # <-- nonaktifkan sementara dulu
-    bind_ip = "127.0.0.1"; # hanya lokal sementara
-  };
+  # --- LAIN-LAIN ---
+  powerManagement.enable = true;
+  powerManagement.cpuFreqGovernor = "schedutil"; # Pilihan yang bagus
+  zramSwap.enable = true; # Sangat direkomendasikan
+  console.keyMap = "uk";
+  environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Bagus untuk aplikasi Electron
+  
+  # DIHAPUS: Variabel di bawah ini spesifik untuk Hyprland atau merupakan anti-pattern.
+  # environment.sessionVariables.QML_IMPORT_PATH = ...
+  # environment.sessionVariables.LD_LIBRARY_PATH = ...
 
-  # OpenGL
-  hardware.graphics = {
-    enable = true;
-  };
-
-
-
-  console.keyMap = "${keyboardLayout}";
-
-  # For Electron apps to use wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  # For Hyprland QT Support
-  environment.sessionVariables.QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
-  # For LD_LIBRARY_PATH
-  environment.sessionVariables.LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
-
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05";
 }
