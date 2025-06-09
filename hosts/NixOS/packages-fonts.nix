@@ -92,7 +92,7 @@
 
 
     #tool bahasa programs
-    gh 
+    gh
     jdk21_headless
     nodejs_24
     nodePackages_latest.prettier
@@ -103,6 +103,7 @@
     stylua
     android-tools
     mongodb-compass
+    lzip
 
     # Hyprland Stuff
     hyprland-qt-support
