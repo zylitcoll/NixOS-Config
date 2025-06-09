@@ -35,13 +35,6 @@
       theme = "fox";
     };
 
-    # Gunakan opsi history yang sudah ada, jangan di dalam promptInit
-    history = {
-      size = 10000;
-      save = 10000;
-      share = true; # Setara dengan 'setopt sharehistory'
-      path = "$HOME/.zsh_history";
-    };
 
     # promptInit sekarang sedikit lebih bersih
     promptInit = ''
@@ -57,7 +50,11 @@
       alias lt='ls --tree'
 
       # Inisialisasi fzf
-      source <(fzf --zsh)
+      source <(fzf --zsh);
+        HISTFILE=~/.zsh_history;
+        HISTSIZE=10000;
+        SAVEHIST=10000;
+        setopt appendhistory;
     '';
   };
 }

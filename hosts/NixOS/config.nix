@@ -41,7 +41,15 @@ in {
     tmp.tmpfsSize = "30%";
 
     # Dukungan AppImage
-    binfmt.registrations.appimage.interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+    binfmt.registrations.appimage = {
+      wrapInterpreterInShell = false;
+      interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+      recognitionType = "magic";
+      offset = 0;
+      mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
+      # PASTIKAN BARIS DI BAWAH INI ADA DAN TIDAK TERHAPUS:
+      magicOrExtension = ''\x7fELF....AI\x02''; 
+    };
 
     # Plymouth (Boot Splash)
     plymouth.enable = true;
@@ -69,7 +77,6 @@ in {
       pulse.enable = true;
       wireplumber.enable = true;
     };
-    security.rtkit.enable = true; # Penting untuk Pipewire
 
     # Layanan Pendukung Desktop
     devmon.enable = true;         # Otomatis me-mount media eksternal
@@ -106,13 +113,17 @@ in {
     flatpak.enable = false;         # Diaktifkan agar konfigurasi remote di bawah berfungsi
   };
 
-  # Cara yang benar untuk menambahkan remote Flatpak
-  services.flatpak.remotes = [
-    { name = "flathub"; location = "https://flathub.org/repo/flathub.flatpakrepo"; }
-  ];
+  systemd.services.flatpak-repo = {
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+
 
   # --- Keamanan ---
   security.polkit.enable = true;
+  security.rtkit.enable = true; # Penting untuk Pipewire
   # Aturan polkit ini sudah bagus, memungkinkan reboot/shutdown tanpa password.
   security.polkit.extraConfig = ''
     polkit.addRule(function(action, subject) {

@@ -31,7 +31,7 @@ in {
     libappindicator   # Penting untuk ikon system tray aplikasi pihak ketiga
     btop              # Monitor sistem yang canggih
     fastfetch         # Informasi sistem di terminal
-    filelight         # Alternatif KDE untuk Baobab, untuk analisis disk
+    #kdePackages.filelight         # Alternatif KDE untuk Baobab, untuk analisis disk
     yt-dlp            # Mengunduh video dari YouTube dan situs lain
     libheif           # Dukungan untuk format gambar HEIF/HEIC (dari iPhone)
     (mpv.override { scripts = [ mpvScripts.mpris ]; }) # MPV dengan kontrol media
