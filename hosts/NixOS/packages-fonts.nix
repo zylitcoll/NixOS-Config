@@ -45,7 +45,7 @@
     (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
 
     #music player
-    libsForQt5.elisa
+    kdePackages.elisa
 
     #aplikasi multimedia
     google-chrome
