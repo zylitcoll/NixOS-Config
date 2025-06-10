@@ -54,6 +54,7 @@
     kdePackages.kdenlive
     handbrake
     obs-studio
+    audacity
 
     #data manager 
     keepassxc
