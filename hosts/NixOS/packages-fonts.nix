@@ -84,9 +84,11 @@
     vulkan-tools
     mesa-demos
     libva-utils
+    intel-compute-runtime-legacy1
 
     #tool
     johnny
+    usbutils
 
 
     #tool bahasa programs

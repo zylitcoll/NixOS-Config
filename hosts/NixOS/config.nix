@@ -33,7 +33,7 @@
 
     initrd = { 
       availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-      kernelModules = [ ];
+      kernelModules = [];
     };
 
     # Needed For Some Steam Games
@@ -41,6 +41,9 @@
       "vm.dirty_bytes" = 1048576;
       "vm.dirty_background_bytes" = 512000;
       "vm.max_map_count" = 2147483642;
+      "vm.swappiness" = 10;
+      "kernel.sched_latency_ns" = 6000000;
+      "kernel.sched_min_granularity_ns" = 750000;
     };
 
     ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub  
@@ -75,17 +78,17 @@
     tmp = {
       useTmpfs = false;
       tmpfsSize = "30%";
-      };
+    };
 
     # Appimage Support
     binfmt.registrations.appimage = {
-      wrapInterpreterInShell = false;
-      interpreter = "${pkgs.appimage-run}/bin/appimage-run";
-      recognitionType = "magic";
-      offset = 0;
-      mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
-      magicOrExtension = ''\x7fELF....AI\x02'';
-      };
+        wrapInterpreterInShell = false;
+        interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+        recognitionType = "magic";
+        offset = 0;
+        mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
+        magicOrExtension = ''\x7fELF....AI\x02'';
+    };
 
     plymouth.enable = true;
   };
