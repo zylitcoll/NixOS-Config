@@ -41,9 +41,6 @@
       "vm.dirty_bytes" = 1048576;
       "vm.dirty_background_bytes" = 512000;
       "vm.max_map_count" = 2147483642;
-      "vm.swappiness" = 10;
-      "kernel.sched_latency_ns" = 6000000;
-      "kernel.sched_min_granularity_ns" = 750000;
     };
 
     ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub  
