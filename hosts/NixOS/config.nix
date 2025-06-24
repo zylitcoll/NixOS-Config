@@ -144,7 +144,7 @@
       settings = {
         default_session = {
           user = username;
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # start Hyprland with a TUI login manager
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd labwc"; # start Hyprland with a TUI login manager
         };
       };
     };
@@ -294,8 +294,6 @@
         "nix-command"
         "flakes"
       ];
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
     gc = {
       automatic = true;
@@ -346,10 +344,6 @@
 
   # For Electron apps to use wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  # For Hyprland QT Support
-  environment.sessionVariables.QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
-  # For LD_LIBRARY_PATH
-  environment.sessionVariables.LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
 
 
   # Open ports in the firewall.

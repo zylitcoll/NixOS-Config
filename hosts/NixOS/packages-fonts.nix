@@ -105,8 +105,7 @@
     mongodb-compass
     lzip
 
-    # Hyprland Stuff
-    hyprland-qt-support
+    #labwc
     ags_1 # desktop overview
     btop
     libheif
@@ -117,7 +116,6 @@
     gnome-system-monitor
     grim
     gtk-engine-murrine #for gtk themes
-    hypridle
     imagemagick 
     inxi
     jq
@@ -126,7 +124,7 @@
     networkmanagerapplet
     nwg-displays
     nwg-look
-    nvtopPackages.intel	 
+    nvtopPackages.intel
     pamixer
     pavucontrol
     playerctl
@@ -169,13 +167,7 @@
   ];
 
   programs = {
-	  hyprland = {
-      enable = true;
-      #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland; #hyprland-git
-		  #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland; #xdph-git
-      portalPackage = pkgs.xdg-desktop-portal-hyprland; # xdph none git
-  	  xwayland.enable = true;
-    };
+	  labwc.enable = true;
 	
 	  waybar.enable = true;
 	  hyprlock.enable = true;
