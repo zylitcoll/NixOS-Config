@@ -108,6 +108,7 @@
     #labwc
     ags_1 # desktop overview
     btop
+    swaybg
     libheif
     brightnessctl # for brightness control
     cava
@@ -121,9 +122,10 @@
     jq
     kitty
     libsForQt5.qtstyleplugin-kvantum #kvantum
+    kanshi
+    labwc-tweaks-gtk
+    labwc-tweaks
     networkmanagerapplet
-    nwg-displays
-    nwg-look
     nvtopPackages.intel
     pamixer
     pavucontrol
@@ -170,7 +172,6 @@
 	  labwc.enable = true;
 	
 	  waybar.enable = true;
-	  hyprlock.enable = true;
 	  firefox.enable = true;
 	  git.enable = true;
     nm-applet.indicator = true;
