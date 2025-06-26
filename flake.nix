@@ -7,7 +7,6 @@
   	#nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 	  #hyprland.url = "github:hyprwm/Hyprland"; # hyprland development
 	  #distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
-    waybar.url ="github:jp7677/Waybar/ext-workspaces";
   };
 
   outputs =

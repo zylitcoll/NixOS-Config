@@ -139,7 +139,7 @@
     slurp
     swappy
     swaynotificationcenter
-    swww
+    swww 
     unzip
     p7zip
     unrar
