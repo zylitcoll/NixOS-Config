@@ -71,6 +71,7 @@
     libreoffice-fresh
     zotero
     anytype
+    vscode-fhs
 
     #sosial media 
     telegram-desktop
@@ -106,9 +107,12 @@
     lzip
 
     #labwc
-    ags_1 # desktop overview
+    ags
     btop
     swaybg
+    swayidle
+    wlopm
+    swaylock
     libheif
     brightnessctl # for brightness control
     cava
@@ -125,6 +129,7 @@
     kanshi
     labwc-tweaks-gtk
     labwc-tweaks
+    wdisplays
     networkmanagerapplet
     nvtopPackages.intel
     pamixer
