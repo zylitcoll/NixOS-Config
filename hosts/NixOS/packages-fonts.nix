@@ -1,25 +1,24 @@
 # 💫 https://github.com/JaKooLit 💫 #
 # Packages and Fonts config including the "programs" options
 
-{ pkgs, inputs, ...}: let
+{ pkgs, inputs, ... }: let
 
-  python-packages = pkgs.python3.withPackages (
-    ps:
-      with ps; [
-	      pip
-        black
-        isort
-        requests
-        pyquery # needed for hyprland-dots Weather script
-        ]
-    );
+  python-packages = pkgs.python3.withPackages (ps:
+    with ps; [
+      pip
+      black
+      isort
+      requests
+      pyquery # needed for hyprland-dots Weather script
+    ]
+  );
 
-  in {
+in {
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = (with pkgs; [
-  # System Packages
+  environment.systemPackages = with pkgs; [
+    # System Packages
     bc
     baobab
     btrfs-progs
@@ -29,25 +28,25 @@
     duf
     findutils
     ffmpeg
-    glib #for gsettings to work
+    glib # for gsettings to work
     gsettings-qt
     git
     killall
     libappindicator
     libnotify
-    openssl #required by Rainbow borders
+    openssl
     pciutils
     wget
     xdg-user-dirs
     xdg-utils
 
     fastfetch
-    (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
+    (mpv.override { scripts = [ mpvScripts.mpris ]; })
 
-    #music player
+    # Music Player
     kdePackages.elisa
 
-    #aplikasi multimedia
+    # Multimedia Apps
     google-chrome
     gimp3-with-plugins
     inkscape-with-extensions
@@ -56,10 +55,10 @@
     obs-studio
     audacity
 
-    #data manager 
+    # Data Manager
     keepassxc
 
-    #games
+    # Games
     pcsx2
     ppsspp
     gzdoom
@@ -67,32 +66,35 @@
     mcpelauncher-ui-qt
     heroic
 
-    #office
+    # Office
     libreoffice-fresh
     zotero
     anytype
     vscode-fhs
 
-    #sosial media 
+    # Social Media
     telegram-desktop
     discord
 
-    #wine 
+    # Wine
     wineWowPackages.stable
     winetricks
 
-    #grafix tool 
+    # Graphics Tools
     vulkan-tools
     mesa-demos
     libva-utils
     intel-compute-runtime-legacy1
 
-    #tool
+    # Tools
     johnny
     usbutils
+    evtest
+    libinput
+    mangohud
+    protonup-qt
 
-
-    #tool bahasa programs
+    # Programming Tools
     gh
     jdk21_headless
     nodejs_24
@@ -106,26 +108,26 @@
     mongodb-compass
     lzip
 
-    #labwc
-    ags
+    # LabWC Environment
+    ags_1
     btop
     swaybg
     swayidle
     wlopm
-    swaylock
+    swaylock-effects
     libheif
-    brightnessctl # for brightness control
+    brightnessctl
     cava
     cliphist
     loupe
     gnome-system-monitor
     grim
-    gtk-engine-murrine #for gtk themes
+    gtk-engine-murrine
     imagemagick 
     inxi
     jq
     kitty
-    libsForQt5.qtstyleplugin-kvantum #kvantum
+    libsForQt5.qtstyleplugin-kvantum
     kanshi
     labwc-tweaks-gtk
     labwc-tweaks
@@ -139,7 +141,7 @@
     libsForQt5.qt5ct
     kdePackages.qt6ct
     kdePackages.qtwayland
-    kdePackages.qtstyleplugin-kvantum #kvantum
+    kdePackages.qtstyleplugin-kvantum
     rofi-wayland
     slurp
     swappy
@@ -154,14 +156,16 @@
     file-roller
     yad
     yt-dlp
-  ]) ++ [
-	  python-packages
+    wlr-randr
+    inputs.waybar-ext.packages.${pkgs.system}.default
+    # Python Packages
+    python-packages
   ];
 
-  # FONTS
+  # Fonts
   fonts.packages = with pkgs; [
     noto-fonts
-    corefonts  #msfonts
+    corefonts
     fira-code
     noto-fonts-cjk-sans
     jetbrains-mono
@@ -174,55 +178,47 @@
   ];
 
   programs = {
-	  labwc.enable = true;
-	
-	  waybar.enable = true;
-	  firefox.enable = true;
-	  git.enable = true;
-    nm-applet.indicator = true;
+    labwc.enable = true;
+    firefox.enable = true;
+    git.enable = true;
     neovim.enable = true;
-
-	  thunar.enable = true;
-	  thunar.plugins = with pkgs.xfce; [
-		  exo
-		  mousepad
-		  thunar-archive-plugin
-		  thunar-volman
-		  tumbler
-  	  ];
-	
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        exo
+        mousepad
+        thunar-archive-plugin
+        thunar-volman
+        tumbler
+      ];
+    };
     virt-manager.enable = true;
 
     steam = {
-     enable = true;
-     gamescopeSession.enable = true;
-     remotePlay.openFirewall = true;
-     dedicatedServer.openFirewall = true;
+      enable = true;
+      gamescopeSession.enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
     };
 
     xwayland.enable = true;
-
     dconf.enable = true;
     seahorse.enable = true;
     fuse.userAllowOther = true;
     mtr.enable = true;
+
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
-	
   };
 
-  # Extra Portal Configuration
   xdg.portal = {
     enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     configPackages = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal
     ];
   };
-
 }

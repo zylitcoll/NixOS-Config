@@ -4,8 +4,8 @@
   description = "My-NixOS";
   inputs = {
 	  nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-  	#nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-	  #hyprland.url = "github:hyprwm/Hyprland"; # hyprland development
+    waybar-ext.url ="github:jp7677/Waybar/ext-workspaces";
+	  #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 	  #distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
   };
 
