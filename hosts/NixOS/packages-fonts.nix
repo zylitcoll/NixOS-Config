@@ -93,6 +93,7 @@ in {
     libinput
     mangohud
     protonup-qt
+    wireshark
 
     # Programming Tools
     gh
@@ -113,6 +114,7 @@ in {
     btop
     swaybg
     swayidle
+    mpvpaper
     wlopm
     swaylock-effects
     libheif
@@ -199,6 +201,12 @@ in {
       gamescopeSession.enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
+    };
+    
+    wireshark = {
+      enable = true;
+      dumpcap.enable = true;
+      usbmon.enable = true;
     };
 
     xwayland.enable = true;

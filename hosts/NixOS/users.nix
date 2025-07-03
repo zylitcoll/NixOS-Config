@@ -25,6 +25,7 @@ in
         "docker"
         "storage"
         "plugdev"
+        "wireshark"
         ];
 
     # define user packages here
