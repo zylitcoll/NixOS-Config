@@ -52,7 +52,6 @@ in {
     inkscape-with-extensions
     kdePackages.kdenlive
     handbrake
-    obs-studio
     audacity
 
     # Data Manager
@@ -209,6 +208,14 @@ in {
       usbmon.enable = true;
     };
 
+    obs-studio = {
+      enable = true;
+      plugins = [
+        pkgs.obs-studio-plugins.wlrobs
+        pkgs.obs-studio-plugins.obs-vkcapture
+      ];
+    };
+
     xwayland.enable = true;
     dconf.enable = true;
     seahorse.enable = true;
@@ -223,10 +230,14 @@ in {
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+    ];
     configPackages = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-wlr
     ];
   };
 }

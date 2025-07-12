@@ -17,8 +17,8 @@
 
   # BOOT related stuff
   boot = {
-    #kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
-    kernelPackages = pkgs.linuxPackages_latest; # Kernel 
+    kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
+    #kernelPackages = pkgs.linuxPackages_latest; # Kernel 
 
     kernelParams = [
       "systemd.mask=systemd-vconsole-setup.service"
@@ -38,8 +38,8 @@
 
     # Needed For Some Steam Games
     kernel.sysctl = {
-      "vm.dirty_bytes" = 1048576;
-      "vm.dirty_background_bytes" = 512000;
+      # "vm.dirty_bytes" = 1048576;
+      # "vm.dirty_background_bytes" = 512000;
       "vm.max_map_count" = 2147483642;
     };
 
