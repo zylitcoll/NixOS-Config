@@ -42,7 +42,10 @@
     xdg-utils
 
     fastfetch
-    (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
+    mpv
+    mpvScripts.mpris
+    mpvpaper
+
 
     #music player
     kdePackages.elisa
@@ -53,7 +56,6 @@
     inkscape-with-extensions
     kdePackages.kdenlive
     handbrake
-    obs-studio
     audacity
 
     #data manager 
@@ -84,15 +86,16 @@
     vulkan-tools
     mesa-demos
     libva-utils
-    intel-compute-runtime-legacy1
 
     #tool
     johnny
     usbutils
+    mangohud
 
 
     #tool bahasa programs
     gh
+    vscode-fhs
     jdk21_headless
     nodejs_24
     nodePackages_latest.prettier
@@ -126,7 +129,7 @@
     networkmanagerapplet
     nwg-displays
     nwg-look
-    nvtopPackages.intel	 
+    nvtopPackages.intel
     pamixer
     pavucontrol
     playerctl
@@ -156,6 +159,7 @@
   # FONTS
   fonts.packages = with pkgs; [
     noto-fonts
+    noto-fonts-color-emoji
     corefonts  #msfonts
     fira-code
     noto-fonts-cjk-sans
@@ -167,6 +171,7 @@
     nerd-fonts.fira-code
     nerd-fonts.fantasque-sans-mono
   ];
+  fonts.fontconfig.useEmbeddedBitmaps = true;
 
   programs = {
 	  hyprland = {
@@ -194,6 +199,13 @@
   	  ];
 	
     virt-manager.enable = true;
+
+    obs-studio = {
+      enable = true;
+      plugins = [
+        pkgs.obs-studio-plugins.obs-vkcapture
+      ];
+    };
 
     steam = {
      enable = true;
