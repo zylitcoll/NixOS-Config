@@ -42,8 +42,7 @@
     xdg-utils
 
     fastfetch
-    mpv
-    mpvScripts.mpris
+    (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
     mpvpaper
 
 
