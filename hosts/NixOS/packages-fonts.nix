@@ -85,6 +85,7 @@
     vulkan-tools
     mesa-demos
     libva-utils
+    clinfo
 
     #tool
     johnny
@@ -99,7 +100,7 @@
     nodejs_24
     nodePackages_latest.prettier
     pnpm_10
-    php 
+    php
     php82Packages.composer
     lua
     stylua
@@ -120,7 +121,7 @@
     grim
     gtk-engine-murrine #for gtk themes
     hypridle
-    imagemagick 
+    imagemagick
     inxi
     jq
     kitty
@@ -156,21 +157,23 @@
   ];
 
   # FONTS
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-color-emoji
-    corefonts  #msfonts
-    fira-code
-    noto-fonts-cjk-sans
-    jetbrains-mono
-    font-awesome
-    terminus_font
-    victor-mono
-    nerd-fonts.jetbrains-mono 
-    nerd-fonts.fira-code
-    nerd-fonts.fantasque-sans-mono
-  ];
-  fonts.fontconfig.useEmbeddedBitmaps = true;
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-color-emoji
+      corefonts  #msfonts
+      fira-code
+      noto-fonts-cjk-sans
+      jetbrains-mono
+      font-awesome
+      terminus_font
+      victor-mono
+      nerd-fonts.jetbrains-mono 
+      nerd-fonts.fira-code
+      nerd-fonts.fantasque-sans-mono
+    ];
+    fontconfig.useEmbeddedBitmaps = true;
+  };
 
   programs = {
 	  hyprland = {
@@ -195,15 +198,15 @@
 		  thunar-archive-plugin
 		  thunar-volman
 		  tumbler
-  	  ];
+  	];
 	
     virt-manager.enable = true;
 
     obs-studio = {
       enable = true;
-      plugins = [
-        pkgs.obs-studio-plugins.obs-vkcapture
-      ];
+      # plugins = [
+      #   pkgs.obs-studio-plugins.obs-vkcapture
+      # ];
     };
 
     steam = {

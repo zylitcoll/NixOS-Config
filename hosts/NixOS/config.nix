@@ -309,7 +309,7 @@
     libvirtd.enable = true;
 
     #waydroid
-    waydroid.enable = true;
+    # waydroid.enable = true;
 
     #Docker
     docker = {

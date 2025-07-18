@@ -11,19 +11,19 @@ in
   };
 
   config = mkIf cfg.enable {
-    nixpkgs.config.packageOverrides = pkgs: {
-      vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-    };
 
     # OpenGL
     hardware.graphics = {
       extraPackages = with pkgs; [
-        intel-media-driver
-        libvdpau-va-gl
-        libva
-        intel-media-sdk       #  SDK untuk Intel Quick Sync (diperlukan OBS Studio/QSV encoder)
+        intel-compute-runtime-legacy1 #opencl
+        opencl-headers
+        ocl-icd
+        intel-media-driver #Accelerated Video Playback
         # Vulkan Support
         vulkan-loader        # Loader Vulkan dasar
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        intel-media-driver
       ];
     };
   };
