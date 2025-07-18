@@ -45,10 +45,6 @@
     (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
     mpvpaper
 
-
-    #music player
-    kdePackages.elisa
-
     #aplikasi multimedia
     google-chrome
     gimp3-with-plugins
