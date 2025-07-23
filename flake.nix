@@ -3,10 +3,10 @@
 {
   description = "My-NixOS";
   inputs = {
-	  nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-  	#nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-	  #hyprland.url = "github:hyprwm/Hyprland"; # hyprland development
-	  #distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
+	nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+	#nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+	#hyprland.url = "github:hyprwm/Hyprland"; # hyprland development
+	#distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
   };
 
   outputs =

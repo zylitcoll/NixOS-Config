@@ -181,7 +181,7 @@
     rpcbind.enable = false;
     nfs.server.enable = false;
     openssh.enable = true;
-    flatpak.enable = false;
+    flatpak.enable = true;
   	blueman.enable = true;
 	
   	#hardware.openrgb.enable = true;
@@ -262,28 +262,30 @@
   };
 
   # Security / Polkit
-  security.rtkit.enable = true;
-  security.polkit.enable = true;
-  security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-      if (
-        subject.isInGroup("users")
-          && (
-            action.id == "org.freedesktop.login1.reboot" ||
-            action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
-            action.id == "org.freedesktop.login1.power-off" ||
-            action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+  security = {
+    rtkit.enable = true;
+    polkit.enable = true;
+    polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (
+          subject.isInGroup("users")
+            && (
+              action.id == "org.freedesktop.login1.reboot" ||
+              action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
+              action.id == "org.freedesktop.login1.power-off" ||
+              action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+            )
           )
-        )
-      {
-        return polkit.Result.YES;
-      }
-    })
-  '';
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
+        {
+          return polkit.Result.YES;
+        }
+      })
     '';
+    pam.services.swaylock = {
+      text = ''
+        auth include login
+      '';
+    };
   };
 
   # Cachix, Optimization settings and garbage collection automation
@@ -344,11 +346,10 @@
 
   console.keyMap = "${keyboardLayout}";
 
-  # For Electron apps to use wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  # For Hyprland QT Support
-  environment.sessionVariables.QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
-
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";  # For Electron apps to use wayland
+    QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";  # For Hyprland QT Support
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
