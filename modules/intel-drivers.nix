@@ -18,7 +18,6 @@ in
         intel-compute-runtime-legacy1 #opencl
         opencl-headers
         ocl-icd
-        intel-media-sdk #QSV
         intel-media-driver #Accelerated Video Playback
         # Vulkan Support
         vulkan-loader        # Loader Vulkan dasar

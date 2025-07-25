@@ -52,6 +52,7 @@
     kdePackages.kdenlive
     handbrake
     audacity
+    blender
 
     #data manager 
     keepassxc
