@@ -85,7 +85,7 @@
     clinfo
 
     #tool
-    johnny
+    john
     usbutils
     mangohud
 
