@@ -164,20 +164,23 @@ in {
   ];
 
   # Fonts
-  fonts.packages = with pkgs; [
-    noto-fonts
-    corefonts
-    fira-code
-    noto-fonts-cjk-sans
-    jetbrains-mono
-    font-awesome
-    terminus_font
-    victor-mono
-    nerd-fonts.jetbrains-mono 
-    nerd-fonts.fira-code
-    nerd-fonts.fantasque-sans-mono
-  ];
-
+fonts = {
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-color-emoji
+      corefonts  #msfonts
+      fira-code
+      noto-fonts-cjk-sans
+      jetbrains-mono
+      font-awesome
+      terminus_font
+      victor-mono
+      nerd-fonts.jetbrains-mono 
+      nerd-fonts.fira-code
+      nerd-fonts.fantasque-sans-mono
+    ];
+    fontconfig.useEmbeddedBitmaps = true;
+  };
   programs = {
     labwc.enable = true;
     firefox.enable = true;
