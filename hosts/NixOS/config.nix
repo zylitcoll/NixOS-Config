@@ -28,8 +28,8 @@
     ];
 
     # This is for OBS Virtual Cam Support
-    #kernelModules = [ "v4l2loopback" ];
-    #  extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+    kernelModules = [ "v4l2loopback" ];
+    extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
 
     initrd = { 
       availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
@@ -140,11 +140,10 @@
 
     greetd = {
       enable = true;
-      vt = 3;
       settings = {
         default_session = {
           user = username;
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd labwc"; # start Hyprland with a TUI login manager
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd labwc"; # start Hyprland with a TUI login manager
         };
       };
     };
@@ -181,7 +180,7 @@
     rpcbind.enable = false;
     nfs.server.enable = false;
     openssh.enable = true;
-    flatpak.enable = false;
+    flatpak.enable = true;
   	blueman.enable = true;
 	
   	#hardware.openrgb.enable = true;

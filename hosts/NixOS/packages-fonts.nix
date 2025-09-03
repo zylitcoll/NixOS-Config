@@ -86,7 +86,7 @@ in {
     intel-compute-runtime-legacy1
 
     # Tools
-    johnny
+    john
     usbutils
     evtest
     libinput
@@ -109,7 +109,7 @@ in {
     lzip
 
     # LabWC Environment
-    ags_1
+    ags
     btop
     swaybg
     swayidle
@@ -158,7 +158,7 @@ in {
     yad
     yt-dlp
     wlr-randr
-    inputs.waybar-ext.packages.${pkgs.system}.default
+    waybar
     # Python Packages
     python-packages
   ];
@@ -208,13 +208,17 @@ in {
       usbmon.enable = true;
     };
 
-    obs-studio = {
-      enable = true;
-      plugins = [
-        pkgs.obs-studio-plugins.wlrobs
-        pkgs.obs-studio-plugins.obs-vkcapture
-      ];
-    };
+  obs-studio = {
+    enable = true;
+
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-gstreamer
+      obs-vkcapture
+    ];
+  };
 
     xwayland.enable = true;
     dconf.enable = true;
@@ -230,9 +234,9 @@ in {
 
   xdg.portal = {
     enable = true;
+    wlr.enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
     ];
     configPackages = [
       pkgs.xdg-desktop-portal-gtk
