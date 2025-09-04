@@ -92,7 +92,6 @@ in {
     libinput
     mangohud
     protonup-qt
-    wireshark
 
     # Programming Tools
     gh
@@ -164,7 +163,7 @@ in {
   ];
 
   # Fonts
-fonts = {
+  fonts = {
     packages = with pkgs; [
       noto-fonts
       noto-fonts-color-emoji
@@ -205,11 +204,6 @@ fonts = {
       dedicatedServer.openFirewall = true;
     };
     
-    wireshark = {
-      enable = true;
-      dumpcap.enable = true;
-      usbmon.enable = true;
-    };
 
   obs-studio = {
     enable = true;
