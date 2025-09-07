@@ -107,7 +107,6 @@
 
     # Hyprland Stuff
     hyprland-qt-support
-    ags_1 # desktop overview
     btop
     libheif
     brightnessctl # for brightness control
@@ -146,7 +145,7 @@
     wallust
     wl-clipboard
     wlogout
-    file-roller
+    xarchiver
     yad
     yt-dlp
   ]) ++ [
