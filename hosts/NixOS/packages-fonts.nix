@@ -145,7 +145,7 @@
     wallust
     wl-clipboard
     wlogout
-    xarchiver
+    file-roller
     yad
     yt-dlp
   ]) ++ [
