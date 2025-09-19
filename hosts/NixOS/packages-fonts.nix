@@ -71,7 +71,6 @@
     anytype
 
     #sosial media 
-    telegram-desktop
     discord
 
     #wine 
@@ -81,6 +80,7 @@
     #grafix tool 
     vulkan-tools
     mesa-demos
+    mesa
     libva-utils
     clinfo
 
@@ -92,6 +92,8 @@
 
     #tool bahasa programs
     gh
+    sqlitebrowser
+    docker-compose
     vscode-fhs
     jdk21_headless
     nodejs_24
